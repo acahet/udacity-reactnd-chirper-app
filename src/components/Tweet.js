@@ -42,7 +42,7 @@ class Tweet extends Component {
                                 <TiHeartOutline className='tweet-icon' />
                             )}
                         </button>
-                        <span>{likes !== 0 && likes}</span>
+                        <span>{likes !== 0 &&likes}</span>
                     </div>
                 </div>
 			</div>
