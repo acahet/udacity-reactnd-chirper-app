@@ -13,7 +13,7 @@ class Tweet extends Component {
 	render() {
         const { tweet } = this.props
         if(tweet === null) {
-            return <p> This tweet doesn't exit</p>
+            return ''
         }
         const { name, avatar, timestamp, text, hasLiked, likes, replies, parent } = tweet
 		return (
