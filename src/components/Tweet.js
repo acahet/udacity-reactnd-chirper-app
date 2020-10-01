@@ -11,12 +11,11 @@ class Tweet extends Component {
         e.preventDefault()
     }
 	render() {
-        console.log(this.props);
         const { tweet } = this.props
         if(tweet === null) {
             return <p> This tweet doesn't exit</p>
         }
-        const { name, avatar, timestamp, text, hasLike, likes, replies, parent } = tweet
+        const { name, avatar, timestamp, text, hasLiked, likes, replies, parent } = tweet
 		return (
 			<div className='tweet'>
 				<img src={avatar}  alt={`Avatar of ${name}`} className='avatar'/>
@@ -27,7 +26,7 @@ class Tweet extends Component {
                         {parent && (
                             <button className='replying-to'
                             onClick={e=>this.toParent(e, parent.id)}>
-                                Replying to@{parent.author}
+                                Replying to @{parent.author}
                             </button>
                         )}
                         <p>{text}</p>
@@ -36,13 +35,13 @@ class Tweet extends Component {
                         <TiArrowBackOutline className='tweet-icon' />
                         <span>{replies !== 0 && replies}</span>
                         <button className='heart-button' onClick={this.handleLike}>
-                            {hasLike === true ? (
+                            {hasLiked === true ? (
                                 <TiHeartFullOutline color='#e0245e' className='tweet-icon'/>
                             ) : (
                                 <TiHeartOutline className='tweet-icon' />
                             )}
                         </button>
-                        <span>{likes !== 0 &&likes}</span>
+                        <span>{likes !== 0 && likes}</span>
                     </div>
                 </div>
 			</div>
@@ -54,6 +53,6 @@ function mapStateToProps({ authedUser, users, tweets }, { id }) {
 	const tweet = tweets[id];
 	const parentTweet = tweet ? tweets[tweet.replyingTo] : null;
 
-	return { authedUser, tweet: tweet ? formatTweet(tweet, users[tweet.author], authedUser) : null };
+	return { authedUser, tweet: tweet ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet) : null };
 }
 export default connect(mapStateToProps)(Tweet);
