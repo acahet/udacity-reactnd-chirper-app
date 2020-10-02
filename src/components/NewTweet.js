@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleAddTweet } from '../actions/tweets'
 
 class NewTweet extends Component {
 	state = {
-		text: '',
+        text: '',
+        toHome: false,
 	};
 	handleChange = (e) => {
 		const text = e.target.value;
 		this.setState(() => ({
-			text,
+            text
 		}));
 	};
 	handleSubmit = (e) => {
@@ -22,11 +24,14 @@ class NewTweet extends Component {
 
 		this.setState(() => ({
 			text: '',
+            toHome: id ? false : true,
 		}));
 	};
 	render() {
-        const { text } = this.state;
-        {/* todo: redirect to  / if submit is clicked */}
+        const { text, toHome } = this.state;
+        if(toHome === true){
+            return <Redirect to='/' />
+        }
 		const tweetLeft = 280 - text.length;
 		return (
 			<div>
@@ -34,7 +39,7 @@ class NewTweet extends Component {
 				<form className="new-tweet" onSubmit={this.handleSubmit}>
 					<textarea
 						placeholder="Whats's happening?"
-						valeu={text}
+						value={text}
 						onChange={this.handleChange}
 						maxLength={280}
 					/>
