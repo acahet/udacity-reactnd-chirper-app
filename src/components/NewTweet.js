@@ -20,7 +20,7 @@ class NewTweet extends Component {
 	};
 	render() {
         const { text } = this.state;
-        {/* todo: readirect to  / if submit is clicked */}
+        {/* todo: redirect to  / if submit is clicked */}
 		const tweetLeft = 280 - text.length;
 		return (
 			<div>
